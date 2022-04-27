@@ -57,7 +57,8 @@ enum ErrorType {
   UHDM_ENUM_CONST_SIZE_MISMATCH = 721,
   UHDM_DIVIDE_BY_ZERO = 722,
   UHDM_INTERNAL_ERROR_OUT_OF_BOUND = 723,
-  UHDM_UNDEFINED_USER_FUNCTION = 724
+  UHDM_UNDEFINED_USER_FUNCTION = 724,
+  BSG_UNPACKED_ARRAY = 726
 };
 
 typedef std::function<void(ErrorType errType, const std::string&,

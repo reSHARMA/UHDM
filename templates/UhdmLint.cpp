@@ -47,6 +47,22 @@ void UhdmLint::leaveBit_select(const bit_select* object,
   }
 }
 
+void UhdmLint::leaveArray_var(const array_var* object,
+                               const BaseClass* parent, vpiHandle handle,
+                               vpiHandle parentHandle) {
+  // TODO: Instead of "" return the expression in the error
+  serializer_->GetErrorHandler()(ErrorType::BSG_UNPACKED_ARRAY,
+                                       "", object, 0);
+}
+
+void UhdmLint::leaveArray_net(const array_net* object,
+                               const BaseClass* parent, vpiHandle handle,
+                               vpiHandle parentHandle) {
+  // TODO: Instead of "" return the expression in the error
+  serializer_->GetErrorHandler()(ErrorType::BSG_UNPACKED_ARRAY,
+                                       "", object, 0);
+}
+
 static const any* returnWithValue(const any* stmt) {
   switch (stmt->UhdmType()) {
     case uhdmreturn_stmt: {

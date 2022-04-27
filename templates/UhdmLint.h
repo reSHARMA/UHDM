@@ -44,6 +44,12 @@ class UhdmLint : public VpiListener {
   void leaveBit_select(const bit_select* object, const BaseClass* parent,
                        vpiHandle handle, vpiHandle parentHandle) override;
 
+  void leaveArray_var(const array_var* object, const BaseClass* parent,
+                       vpiHandle handle, vpiHandle parentHandle);
+
+  void leaveArray_net(const array_net* object, const BaseClass* parent,
+                       vpiHandle handle, vpiHandle parentHandle);
+
   void leaveFunction(const function* object, const BaseClass* parent,
                      vpiHandle handle, vpiHandle parentHandle) override;
 
