@@ -28,6 +28,8 @@
 #include <uhdm/clone_tree.h>
 #include <uhdm/uhdm.h>
 #include <uhdm/ExprEval.h>
+#include <iostream>
+#include <cassert>
 
 namespace UHDM {
 
@@ -129,6 +131,13 @@ void UhdmLint::leaveModule(const module* object, const BaseClass* parent,
   if (auto assigns = object->Cont_assigns()) {
     checkMultiContAssign(assigns);
   }
+  int always = 0;
+  auto Vec = object->Process();
+  for (int i = 0; i < Vec->size();i++) {
+    if (Vec->at(i)->UhdmType() == uhdmalways) always += 1;
+  }
+  if (always > 1)
+    serializer_->GetErrorHandler()(ErrorType::BSG_MULTIPLE_ALWAYS, "", object, 0);
 }
 
 void UhdmLint::checkMultiContAssign(
