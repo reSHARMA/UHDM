@@ -132,7 +132,9 @@ void UhdmLint::leaveModule(const module* object, const BaseClass* parent,
     checkMultiContAssign(assigns);
   }
   int always = 0;
-  int assign = object -> Cont_assigns() -> size();
+  int assign = 0;
+  if(object->Cont_assigns())
+    assign = object -> Cont_assigns() -> size();
   auto Vec = object->Process();
   if (Vec) {
     for (int i = 0; i < Vec->size(); i++) {
@@ -147,9 +149,15 @@ void UhdmLint::leaveModule(const module* object, const BaseClass* parent,
     for (int i = 0; i < Vec1->size(); i++) {
       parameter *p = (parameter*) Vec1->at(i);
       if (p->VpiLocalParam())
-      serializer_->GetErrorHandler()(ErrorType::BSG_MULTIPLE_ALWAYS, "", object, 0);
+      serializer_->GetErrorHandler()(ErrorType::BSG_LOCAL_PARAM, "", object, 0);
     }
   }
+  auto InterfaceVec = object -> Interfaces();
+  if (InterfaceVec && !InterfaceVec -> empty())
+      serializer_->GetErrorHandler()(ErrorType::BSG_INTERFACE, "", object, 0);
+  auto InterfaceArrVec = object -> Interface_arrays();
+  if (InterfaceArrVec && !InterfaceArrVec -> empty())
+      serializer_->GetErrorHandler()(ErrorType::BSG_INTERFACE, "", object, 0);
 }
 
 void UhdmLint::checkMultiContAssign(
