@@ -224,6 +224,12 @@ void UhdmLint::checkMultiContAssign(
   }
 }
 
+void UhdmLint::leaveSys_func_call(const sys_func_call* object,
+                               const BaseClass* parent, vpiHandle handle,
+                               vpiHandle parentHandle) {
+      serializer_->GetErrorHandler()(ErrorType::BSG_SIGNED, "", object, 0);
+}
+
 void UhdmLint::leaveAssignment(const assignment* object,
                                const BaseClass* parent, vpiHandle handle,
                                vpiHandle parentHandle) {

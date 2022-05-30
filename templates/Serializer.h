@@ -61,7 +61,8 @@ enum ErrorType {
   BSG_UNPACKED_ARRAY = 726,
   BSG_MULTIPLE_ALWAYS = 727,
   BSG_LOCAL_PARAM = 728,
-  BSG_INTERFACE = 729
+  BSG_INTERFACE = 729,
+  BSG_SIGNED = 730
 };
 
 typedef std::function<void(ErrorType errType, const std::string&,

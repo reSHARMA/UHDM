@@ -63,6 +63,9 @@ class UhdmLint : public VpiListener {
   void leaveAssignment(const assignment* object, const BaseClass* parent,
                        vpiHandle handle, vpiHandle parentHandle) override;
 
+  void leaveSys_func_call(const sys_func_call* object, const BaseClass* parent,
+                       vpiHandle handle, vpiHandle parentHandle) override;
+
   void leaveLogic_net(const logic_net* object, const BaseClass* parent,
                       vpiHandle handle, vpiHandle parentHandle) override;
 
