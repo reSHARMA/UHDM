@@ -132,11 +132,12 @@ void UhdmLint::leaveModule(const module* object, const BaseClass* parent,
     checkMultiContAssign(assigns);
   }
   int always = 0;
+  int assign = object -> Cont_assigns() -> size();
   auto Vec = object->Process();
   for (int i = 0; i < Vec->size();i++) {
     if (Vec->at(i)->UhdmType() == uhdmalways) always += 1;
   }
-  if (always > 1)
+  if (always > 1 || (always > 0 && assign > 0))
     serializer_->GetErrorHandler()(ErrorType::BSG_MULTIPLE_ALWAYS, "", object, 0);
 }
 
